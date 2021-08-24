@@ -1,24 +1,71 @@
   
-import React from "react";
 import { Link } from "react-router-dom";
+import React, {useState} from "react";
 import { Form, Checkbox } from "antd";
+import { Alert } from "antd";
+import auth from "../../../utils/helpers/auth";
+import authApi from "../services/auth";
+import { set_admin_info } from "../../../redux/action/admin";
 
-
-function SignIn() {
+function SingIn() {
   const contentSignup ="Bạn đã có tài khoản? "
   const titleSignup = "Đăng ký ngay"
+  const useFormInput = (initialValue) => {
+    const [value, setValue] = useState(initialValue);
+  
+    const handleChange = (e) => {
+      setValue(e.target.value);
+    };
+    return {
+      value,
+      onChange: handleChange,
+    };
+  };
+  
+  const [error, setError] = useState("");
+  const username = useFormInput("");
+  const password = useFormInput("");
 
-  const onFinish = (values) => {
-    console.log("Success:", values);
+
+  const onFinish = () => {
+    const data = {
+      email: username,
+      password: password,
+    };
+    authApi
+      .adminLogin(data)
+      .then(({ info, token }) => {
+        set_admin_info(info, token);
+        auth.setAuthInfo(info, token);
+      })
+      .catch((e) => {
+        if (e.response && e.response.data) {
+          setError(e.response.data.message);
+        }
+      });
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
 
+  const onClose = () => {
+    setError("");
+  };
 
   return (
     <>
+    {error && (
+          <div className="login__validation">
+            <Alert
+              message={error}
+              type="error"
+              showIcon={true}
+              closable={true}
+              onClose={onClose}
+            />
+          </div>
+        )}
       <div className="form-signin-text">
         <p>ĐĂNG NHẬP</p>
       </div>
@@ -31,16 +78,18 @@ function SignIn() {
         onFinishFailed={onFinishFailed}
       >
         <div className="form-signin-box">
-          <input placeholder="User Name" />
+          <input {...username} placeholder="User Name" />
         </div>
         <div className="form-signin-box">
-          <input type="password" placeholder="Password" />
+          <input {...password} type="password" placeholder="Password" />
         </div>
         <div className="form-signin-checkbox">
           <Checkbox>Remember me</Checkbox>
         </div>
         <div className="form-signin-submit">
-          <button type="black">Submit</button>
+          <button type="submit" onSubmit={onFinish}>
+            Submit
+          </button>
         </div>
         <div className="form-signin-box">
           <span>{contentSignup}<a href="/sign-up">{titleSignup}</a></span>
