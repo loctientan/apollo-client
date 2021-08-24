@@ -7,7 +7,7 @@ import auth from "../../../utils/helpers/auth";
 import authApi from "../services/auth";
 import { set_admin_info } from "../../../redux/action/admin";
 
-function SingIn() {
+function SignIn() {
   const contentSignup ="Bạn đã có tài khoản? "
   const titleSignup = "Đăng ký ngay"
   const useFormInput = (initialValue) => {
