@@ -1,8 +1,13 @@
   
 import React from "react";
+import { Link } from "react-router-dom";
 import { Form, Checkbox } from "antd";
 
-function SingIn() {
+
+function SignIn() {
+  const contentSignup ="Bạn đã có tài khoản? "
+  const titleSignup = "Đăng ký ngay"
+
   const onFinish = (values) => {
     console.log("Success:", values);
   };
@@ -10,6 +15,7 @@ function SingIn() {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
 
   return (
     <>
@@ -36,9 +42,12 @@ function SingIn() {
         <div className="form-signin-submit">
           <button type="black">Submit</button>
         </div>
+        <div className="form-signin-box">
+          <span>{contentSignup}<a href="/sign-up">{titleSignup}</a></span>
+        </div>
       </Form>
     </>
   );
 }
 
-export default SingIn;
+export default SignIn;
