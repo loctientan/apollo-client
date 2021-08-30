@@ -14,12 +14,13 @@ const authenticated = () => {
 
 const setAuthInfo = (info, token) => {
   setToken(token);
-  localStorage.setItem("admin:info", JSON.stringify(info));
+  localStorage.setItem("user:info", JSON.stringify(info));
+  console.log(info, token)
 };
 
 const clearAuthInfo = () => {
   clearToken();
-  localStorage.removeItem("admin:info");
+  localStorage.removeItem("user:info");
 };
 
 const auth = {
