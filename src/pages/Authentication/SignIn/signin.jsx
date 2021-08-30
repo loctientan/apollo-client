@@ -1,4 +1,5 @@
   
+import { Link } from "react-router-dom";
 import React, {useState} from "react";
 import { Form, Checkbox } from "antd";
 import { Alert } from "antd";
@@ -6,8 +7,9 @@ import auth from "../../../utils/helpers/auth";
 import authApi from "../../../core/api/static/auth";
 import { set_user_info } from "../../../store/actions/user.action";
 
-function SingIn() {
-
+function SignIn() {
+  const contentSignup ="Bạn đã có tài khoản? "
+  const titleSignup = "Đăng ký ngay"
   const useFormInput = (initialValue) => {
     const [value, setValue] = useState(initialValue);
   
@@ -90,9 +92,12 @@ function SingIn() {
             Submit
           </button>
         </div>
+        <div className="form-signin-box">
+          <span>{contentSignup}<a href="/sign-up">{titleSignup}</a></span>
+        </div>
       </Form>
     </>
   );
 }
 
-export default SingIn;
+export default SignIn;
