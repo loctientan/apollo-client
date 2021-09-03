@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import SignUp from "../../pages/Authentication/SignUp";
-import SignIn from "../../pages/Authentication/SignIn";
+import SignUp from "../../pages/Authentication/SignUp/signup";
+import SignIn from "../../pages/Authentication/SignIn/signin";
 
 function Header() {
 

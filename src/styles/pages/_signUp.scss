@@ -1,0 +1,41 @@
+  
+.form-signup-text p {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 500;
+    padding: 1rem;
+    color: black;
+  }
+  
+  .form-signup-box {
+    padding: 1rem 1rem 0;
+    a{
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      height: 45px;
+      border: none;
+      border-bottom: 1px solid darkgray;
+      background-color: white !important;
+    }
+  }
+  
+  .form-signup-checkbox {
+    padding: 1rem;
+  }
+  
+  .form-signup-submit {
+    padding: 1rem;
+  
+    button {
+      width: 100%;
+      background-color: black;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+      height: 40px;
+      cursor: pointer;
+    }
+  }

@@ -4,5 +4,6 @@ export const CURRENT_ENV = {
     AUTH: `api/user/login`,
     GET_PRODUCT: `/api/product`,
     GET_CATEGORY: `/api/category`,
+    REGISTER: `/api/user/register`,
   },
 }
