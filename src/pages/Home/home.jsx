@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from 'react'
 import { Row, Col, Carousel } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination } from "swiper/core";
+import productApi from "../../core/api/static/product";
+import categoryApi from "../../core/api/static/category";
 
 SwiperCore.use([Pagination]);
 
@@ -49,12 +51,34 @@ const SamplePrevArrow = (props) => {
     </div>
   );
 };
+
 const settings = {
   nextArrow: <SampleNextArrow />,
   prevArrow: <SamplePrevArrow />,
 };
 
 const Home = () => {
+
+  // eslint-disable-next-line
+  const [product, setProduct] = useState({});
+  const [category, setCategory] = useState({})
+
+  useEffect(() => {
+       ; (async () => {
+        const listProduct = await productApi.getList();
+        const listCategory = await categoryApi.getList(); 
+        setProduct(listProduct);
+        setCategory(listCategory)
+      })()
+      return () => {
+        setProduct({});
+        setCategory({}); 
+      };
+    }, [])
+
+  console.log(product)
+  console.log(category)
+
   return (
     <div className="home-container">
       <section className="home-carousel">

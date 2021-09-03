@@ -8,6 +8,7 @@ const authAxios = a.create({ baseURL: CURRENT_ENV.API_URL });
 authAxios.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
+    console.log(token)
     if (token) {
       config.headers["Authorization"] = token;
     }
@@ -41,7 +42,7 @@ export default class BaseService {
       }).then(({ data }) => data);
     }
 
-    return axios.get(usePrefix ? `${this.prefix}${url}` : url, {
+    return axios.get(url, {
       params,
       ...options,
     }).then(({ data }) => data);

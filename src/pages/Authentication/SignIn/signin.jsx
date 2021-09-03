@@ -4,8 +4,8 @@ import React, {useState} from "react";
 import { Form, Checkbox } from "antd";
 import { Alert } from "antd";
 import auth from "../../../utils/helpers/auth";
-import authApi from "../services/auth";
-import { set_admin_info } from "../../../redux/action/admin";
+import authApi from "../../../core/api/static/auth";
+import { set_user_info } from "../../../store/actions/user.action";
 
 function SignIn() {
   const contentSignup ="Bạn đã có tài khoản? "
@@ -29,14 +29,15 @@ function SignIn() {
 
   const onFinish = () => {
     const data = {
-      email: username,
-      password: password,
+      email: username.value,
+      password: password.value,
     };
     authApi
-      .adminLogin(data)
-      .then(({ info, token }) => {
-        set_admin_info(info, token);
-        auth.setAuthInfo(info, token);
+      .clientLogin(data)
+      .then(({ info, access_token }) => {
+        set_user_info(info, access_token);
+        auth.setAuthInfo(info, access_token);
+        console.log(info, access_token)
       })
       .catch((e) => {
         if (e.response && e.response.data) {
