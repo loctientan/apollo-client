@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import SignUp from "../../pages/Authentication/SignUp/signup";
-import SignIn from "./../../pages/Authentication/SignIn/signin";
+import SignUp from "../../pages/Authentication/SignUp";
+import SignIn from "../../pages/Authentication/SignIn";
 
 function Header() {
 
@@ -13,17 +13,17 @@ function Header() {
 
   const [switchPage, setStatus] = useState(false);
 
-  useEffect(() => {
-     debugger 
+
+  useEffect(() => { 
     const getPath = window.location.pathname;
     if(getPath =="/sign-in"){
-      switchPage.valueOf(true);
+      setStatus(true);
     } else if (getPath =="/sign-up") {
-      switchPage.valueOf(false);
+      setStatus(false);
     } else {
-      switchPage.valueOf(true);
+      setStatus(true);
     }
-    console.log(switchPage);
+  
   });
  
   return (
@@ -143,7 +143,7 @@ function Header() {
               className="mainNav"
               style={navBar ? { transform: "translateX(0)" } : null}
             >
-             {switchPage? <SignUp/>:<SignIn/>}
+              {switchPage? <SignIn/>:<SignUp/>}
             </div>
           </nav>
           <button
